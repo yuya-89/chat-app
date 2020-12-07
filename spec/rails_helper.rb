@@ -31,6 +31,9 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+
+
 I18n.locale = "en"
 
 RSpec.configure do |config|
@@ -41,6 +44,7 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+  config.include SignInSupport
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
